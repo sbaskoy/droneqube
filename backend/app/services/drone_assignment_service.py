@@ -14,7 +14,7 @@ class DroneAssignmentService:
         completed = data.get("completed", False)
         assignment = DroneAssignment(
             task_id=task_id, drone_id=drone_id, completed=completed)
-        return DroneAssignmentRepository.add(assignment=assignment)
+        return DroneAssignmentRepository.add(item=assignment)
 
     @staticmethod
     def filter_by_task(task_id: int):

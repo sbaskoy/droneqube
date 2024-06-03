@@ -32,11 +32,12 @@ class MinIoUploader(ImageUploader):
         if not found:
             self.client.make_bucket(bucket_name)
 
-    def save_image_to_database(self, assignment: DroneAssignment, image_size: int, image_name: int, folder: str):
+    def save_image_to_database(self, assignment: DroneAssignment, image_size: int, image_name: int, folder: str, url=str):
         drone_image = DroneImage(task_id=assignment.task_id, drone_id=assignment.drone_id,
                                  folder=folder,
                                  name=image_name,
-                                 size=image_size
+                                 size=image_size,
+                                 url=url,
                                  )
         db.session.add(drone_image)
         db.session.commit()
@@ -62,8 +63,9 @@ class MinIoUploader(ImageUploader):
             length=im_size,
             content_type='image/jpeg',
         )
+        url = self.client.presigned_get_object(MINIO_BUCKET_NAME, object_name,)
         return self.save_image_to_database(
-            assignment, im_size, object_name, drone_name)
+            assignment, im_size, object_name, drone_name, url=url)
 
     def upload_test_image(self):
         im = generate_noisy_image(640, 640)

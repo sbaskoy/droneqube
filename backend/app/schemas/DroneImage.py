@@ -10,7 +10,7 @@ class DroneImage(db.Model, SerializerMixin):
     folder = db.Column(db.String(100), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     size = db.Column(db.Integer, nullable=False)
-
+    url = db.Column(db.String(250), nullable=False)
     # task = db.relationship("Task", back_populates="task")
 
     def __repr__(self):
