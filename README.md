@@ -42,3 +42,11 @@ veya
 ```bash
 python run.py
 ```
+
+### MINIO Ayarları
+
+Ben [play.min.io](https://play.min.io/) sitesini kullandım.. kendi `minio` sunucunuz var ise `.env` dosyası içerisinde bilgileri güncelleyebilirsiniz. eğer bu siteyi kullanmak isterseniz. Beni oturum bilgilerimi kullanabilirsiniz veya aşağıdaki oturum bilgileri ile kendinize bir bucket ve ilgili key'leri oluşturup o bilgiler ile devam edebilirsiniz.
+
+Username: `Q3AM3UQ867SPQQA43P2F`
+
+Password: `zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG`
