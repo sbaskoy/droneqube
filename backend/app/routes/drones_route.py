@@ -22,7 +22,6 @@ update_update_Schema = UpdateDroneSchema()
 
 @drones_bp.route("/", methods=["GET"])
 @jwt_required()
-@role_required(Roles.User)
 def list_drones():
     return DroneController.paginate()
 
