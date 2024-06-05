@@ -17,14 +17,4 @@ class Role(db.Model, SerializerMixin):
         return f'<Role {self.name}>'
 
 
-def create_default_roles():
-    existing_roles = Role.query.all()
-    if not existing_roles:
-        # Veri yoksa Admin ve User rollerini ekle
-        admin_role = Role(name=Roles.Admin)
-        user_role = Role(name=Roles.User)
 
-        db.session.add(admin_role)
-        db.session.add(user_role)
-        db.session.commit()
-        print("Admin ve User rolleri başarıyla eklendi.")

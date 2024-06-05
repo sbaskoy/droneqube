@@ -15,6 +15,6 @@ class RoleRepository:
 
     @staticmethod
     def add_role(role: Role):
-        db.session.add(Role)
+        db.session.add(role)
         db.session.commit()
         return role

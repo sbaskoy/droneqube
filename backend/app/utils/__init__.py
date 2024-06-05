@@ -8,6 +8,7 @@ from flask import jsonify
 
 from app.models.app_error import AppError
 from sqlalchemy_serializer import SerializerMixin
+from app.schemas.Role import Roles
 
 
 def string_to_enum(string_value, enum_cls):
@@ -49,3 +50,35 @@ def generate_noisy_image(width: int, height: int, text: str = "") -> Image:
     draw.text((text_x, text_y), text, font=font, fill=fill_color)
 
     return noisy_image
+
+
+def create_default_roles():
+    from app.services.role_services import RoleService
+    existing_roles = RoleService.get_all()
+    if not existing_roles:
+        RoleService.create_if_not_exists({"name": "Admin"})
+        RoleService.create_if_not_exists({"name": "User"})
+        print("Default roles craeted")
+
+
+def create_default_user():
+    import os
+    username = os.getenv("DEFAULT_USER_USERNAME")
+    password = os.getenv("DEFAULT_USER_PASSWORD")
+    name = os.getenv("DEFAULT_USER_NAME")
+    last_name = os.getenv("DEFAULT_USER_LAST_NAME")
+    if (not username or not password or not name or not last_name):
+        print("default user not created")
+        return
+    from app.services.user_service import UserService
+
+    default_user = UserService.find_by_username(username=username)
+    if (not default_user):
+        UserService.create({
+            "username": username,
+            "password": password,
+            "name": name,
+            "last_name": last_name,
+            "role": "Admin"
+        })
+        print("default user created")

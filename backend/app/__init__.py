@@ -3,12 +3,14 @@ from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 from flask_cors import CORS
 import os
+
 from app import routes
 from app import schemas as database
-from app.schemas.Role import create_default_roles
+
 
 from app.middlewares.error_handler import handle_error, handle_app_error
 from app.models.app_error import AppError
+from app.utils import create_default_roles,create_default_user
 
 load_dotenv()
 
@@ -33,7 +35,8 @@ with app.app_context():
     database.init(app)
     routes.set_routes(app)
     create_default_roles()
-    # upload_test_image()
+    create_default_user()
+
 
 
 @app.errorhandler(AppError)
