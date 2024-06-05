@@ -6,6 +6,7 @@
 
 """
 from flask import Blueprint
+
 from flask_jwt_extended import jwt_required
 
 from app.controllers.task_controller import TaskController
@@ -21,13 +22,13 @@ update_task_Schema = UpdateTaskSchema()
 assign_drone_to_task_Schema = AssignDroneToTaskSchema()
 
 
-@tasks_bp.route("/", methods=["GET"])
+@tasks_bp.route("", methods=["GET"])
 @jwt_required()
 def list_task():
     return TaskController.paginate()
 
 
-@tasks_bp.route("/", methods=["POST"])
+@tasks_bp.route("", methods=["POST"])
 @validate_request(create_task_schema)
 @jwt_required()
 def create_task():

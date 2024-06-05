@@ -5,6 +5,7 @@
 
 """
 from flask import Blueprint
+from flask_jwt_extended import jwt_required
 
 from app.middlewares.validations import validate_request
 from app.controllers.auth_controller import AuthController
@@ -26,3 +27,9 @@ def login():
 @validate_request(register_Schema)
 def register():
     return AuthController.register()
+
+
+@auth_bp.route('/refresh', methods=['POST'])
+@jwt_required(refresh=True)
+def refresh():
+    return AuthController.refresh()

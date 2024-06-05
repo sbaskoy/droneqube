@@ -12,8 +12,9 @@ class DroneAssignmentService:
         task_id = data.get("task_id")
         drone_id = data.get("drone_id")
         completed = data.get("completed", False)
+        url = data.get("url", )
         assignment = DroneAssignment(
-            task_id=task_id, drone_id=drone_id, completed=completed)
+            task_id=task_id, drone_id=drone_id, completed=completed, url=url)
         return DroneAssignmentRepository.add(item=assignment)
 
     @staticmethod

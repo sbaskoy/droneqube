@@ -43,6 +43,7 @@ class MinIoUploader(ImageUploader):
         db.session.commit()
         return drone_image
 
+    
     def upload(self, im: Image, assignment: DroneAssignment, image_name: str):
         self.create_bucket_to_min_io(MINIO_BUCKET_NAME)
         current_time = datetime.now()
