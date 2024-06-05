@@ -18,9 +18,12 @@ npm install
 npm run dev
 ```
 
-> `.env` içerisinde `VITE_API_URL` değişkeninde backend uygulamasının yolu mevcut. Kendi backend uygulamanızın yolu ile değiştirmeyi unutmayınız.
+### Ayarlar
+
+
+ `.env` içerisinde `VITE_API_URL` değişkeninde backend uygulamasının yolu mevcut. Kendi backend uygulamanızın yolu ile değiştirmeyi unutmayınız.
 
 
 
 
-> Backend uygulamasında cors iznini verdiğinizden emin olun.
+ Backend uygulamasında cors iznini verdiğinizden emin olun.
