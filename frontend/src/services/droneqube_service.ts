@@ -33,17 +33,17 @@ const errorHandler = async (error: AxiosError) => {
         }
     }
 
-
-    let errorMessage = "DroneQube service bağlanılamadı.";
+    console.log(error);
+    let errorMessage = error.message ??  "DroneQube service bağlanılamadı.";
     const errorData = error.response?.data as ApiErrorModel | undefined;;
-    const message = errorData?.error.message;
+    const message = errorData?.error?.message;
     if (typeof message == "string") {
         errorMessage = message;
     } else if (typeof message == "object") {
         errorMessage = Object.entries(message).map(([key, values]) => {
             return `${key}: ${values.map(i => i).join(",")}`
         }).join("\n");
-    }
+    } 
     useErrorToast(errorMessage);
     return { data: null }
 }

@@ -4,8 +4,11 @@
         <transition name="dialog-fade">
             <div class="h-[100vh] w-[100vw] absolute top-0 left-0 flex flex-col gap-2 bg-dark-bg bg-opacity-90 z-50 "
                 v-if="show" @dblclick.stop>
-                <div class="flex gap-3 p-4 h-20 justify-end">
-
+                <div class="flex gap-3 p-4 h-20 justify-end bg-dark-bg">
+                   <div class="flex flex-col flex-1">
+                     <h5 v-if="title" class="flex-1">{{ title }}</h5>
+                     <p class="text-sm">{{  selectedItem.name }}</p>
+                   </div>
                     <IconButton @click="hideDialog" class="absolute top-5 right-2">
                         <XMarkIcon />
                     </IconButton>
@@ -56,7 +59,7 @@ import CachedImage from "@/widgets/CachedImage.vue"
 
 const dialogStore = useShowImageDialog();
 
-const { images, selectedIndex, show } = storeToRefs(dialogStore);
+const { images, title, selectedIndex, show } = storeToRefs(dialogStore);
 
 const { next, previous, hideDialog, setIndex } = dialogStore;
 

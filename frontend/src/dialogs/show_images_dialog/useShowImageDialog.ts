@@ -8,6 +8,7 @@ type ImageDialogStore = {
     images: Image[],
     selectedIndex: number,
     show: boolean,
+    title: string
 
 }
 
@@ -17,12 +18,14 @@ export const useShowImageDialog = defineStore("show_images_dialog", {
             images: [],
             selectedIndex: 0,
             show: false,
+            title: "",
         }
     },
     actions: {
-        showImagesDialog(_images: Image[], startIndex: number = 0) {
+        showImagesDialog(_images: Image[], _title: string = "", startIndex: number = 0,) {
             this.images = _images;
             this.selectedIndex = startIndex;
+            this.title = _title;
             this.show = true;
         },
         hideDialog() {

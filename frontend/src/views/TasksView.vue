@@ -18,7 +18,8 @@
                 <p class="col-span-full p-5">Görev bulunamadı</p>
             </template>
             <template v-else>
-                <TaskItem v-for="task in filteredTasks" :key="task.id" :task="task" @on-show-images="onShowTaskImages" />
+                <TaskItem v-for="task in filteredTasks" :key="task.id" :task="task" @on-show-images="onShowTaskImages"
+                    @on-run-task="onRunTask" />
             </template>
 
             <p class="col-span-full p-5 hover:text-dark-primary text-center" role="button"
@@ -52,6 +53,9 @@ const handleLoadMoreButtonClick = (_: Event) => {
     tasksStore.loadMore();
 }
 const onShowTaskImages = (task: Task) => {
-    tasksStore.showTaskImages(task.id);
+    tasksStore.showTaskImages(task);
+}
+const onRunTask = (task: Task) => {
+    tasksStore.runTask(task.id);
 }
 </script>

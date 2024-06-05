@@ -42,16 +42,29 @@ export const useTasksStore = defineStore("tasks_store", () => {
             tasks.value?.push(task);
         }
     }
-    const showTaskImages = async (taskId: number) => {
+    const showTaskImages = async (task: Task) => {
         loadingStore.show();
-        var res = await TaskService.listImages(taskId);
+        var res = await TaskService.listImages(task.id);
 
         if (res) {
             if (res.length == 0) {
                 useInfoToast("Bu göreve ait resim bulunamadı")
             } else {
-                imageDialogStore.showImagesDialog(res);
+                imageDialogStore.showImagesDialog(res, `${task.name} görevinin resimleri.`);
             }
+        }
+        loadingStore.hide();
+    }
+    const runTask = async (taskId: number) => {
+        loadingStore.show();
+        var res = await TaskService.executeTask(taskId);
+
+        if (res) {
+            useInfoToast("Bu göreve çalıştırıldı")
+            if (res.length > 0) {
+                imageDialogStore.showImagesDialog(res, "Çalıştırma resimleri");
+            }
+
         }
         loadingStore.hide();
     }
@@ -61,5 +74,5 @@ export const useTasksStore = defineStore("tasks_store", () => {
             tasks.value = res;
         }
     })();
-    return { loading, filterText, filteredTasks, loadMore, addTask, showTaskImages }
+    return { loading, filterText, filteredTasks, loadMore, addTask, showTaskImages, runTask }
 })

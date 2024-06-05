@@ -40,6 +40,12 @@ class TaskService {
             return response.data as Image[]
         }
     }
+    static async executeTask(taskId: number) {
+        const response = await service.post(`/tasks/${taskId}/execute`);
+        if (response.data) {
+            return response.data as Image[]
+        }
+    }
 
 }
 export default TaskService;
