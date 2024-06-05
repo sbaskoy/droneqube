@@ -20,13 +20,13 @@ create_drone_schema = CreateDroneSchema()
 update_update_Schema = UpdateDroneSchema()
 
 
-@drones_bp.route("/", methods=["GET"])
+@drones_bp.route("", methods=["GET"])
 @jwt_required()
 def list_drones():
     return DroneController.paginate()
 
 
-@drones_bp.route("/", methods=["POST"])
+@drones_bp.route("", methods=["POST"])
 @validate_request(create_drone_schema)
 @jwt_required()
 def create_drone():
