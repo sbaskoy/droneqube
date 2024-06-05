@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    overflow: hidden;
+}
+
+#app {
+    height: 100vh;
+    width: 100vw;
+
+}
+
+body {
+    @apply bg-dark-bg text-dark-text
+}
+
+h1 {
+    @apply text-5xl
+}
+
+h2 {
+    @apply text-4xl
+}
+
+h3 {
+    @apply text-3xl
+}
+
+h4 {
+    @apply text-2xl
+}
+
+h5 {
+    @apply text-xl
+}
+
+.search-input {
+    @apply bg-dark-card text-dark-text border border-dark-card rounded-md px-4 py-1 focus:border-dark-card-active outline-none;
+}
+
+.input {
+    @apply bg-dark-card text-dark-text border border-dark-card rounded-md px-4 py-2 focus:border-dark-card-active outline-none;
+}
+
+.btn-primary {
+    @apply bg-dark-primary text-dark-bg border border-transparent rounded-md px-4 py-2 font-semibold transition duration-300 ease-in-out;
+}
+
+.btn-primary:hover {
+    @apply bg-dark-card-hover text-dark-primary;
+}
+
+.btn-primary:active {
+    @apply bg-dark-card-active text-dark-primary;
+}
+
+.dialog-fade-enter-active,
+.dialog-fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.dialog-fade-enter,
+.dialog-fade-leave-to {
+    opacity: 0;
+}
+
+.image-fade-enter-active,
+.image-fade-leave-active {
+    transition: opacity 0.5s;
+}
+
+.image-fade-enter,
+.image-fade-leave-to
+
+/* .image-fade-leave-active in <2.1.8 */
+    {
+    opacity: 0;
+}
+
+@layer utilities {
+    .text-button {
+        @apply border border-dark-text-disable border-opacity-40 px-4 py-1 rounded-md font-semibold hover:bg-dark-card
+    }
+}

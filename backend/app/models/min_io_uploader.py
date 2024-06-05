@@ -3,7 +3,8 @@ import os
 from minio import Minio
 from PIL import Image
 import tempfile
-from datetime import datetime
+from datetime import datetime, timedelta
+
 from app.models.image_uploader import ImageUploader
 from app.schemas.DroneImage import DroneImage
 from app.schemas.DroneAssignment import DroneAssignment
@@ -43,7 +44,6 @@ class MinIoUploader(ImageUploader):
         db.session.commit()
         return drone_image
 
-    
     def upload(self, im: Image, assignment: DroneAssignment, image_name: str):
         self.create_bucket_to_min_io(MINIO_BUCKET_NAME)
         current_time = datetime.now()
@@ -64,7 +64,9 @@ class MinIoUploader(ImageUploader):
             length=im_size,
             content_type='image/jpeg',
         )
-        url = self.client.presigned_get_object(MINIO_BUCKET_NAME, object_name,)
+        # url geçerlilik süresi 7 gün
+        url = self.client.presigned_get_object(MINIO_BUCKET_NAME, object_name)
+
         return self.save_image_to_database(
             assignment, im_size, object_name, drone_name, url=url)
 

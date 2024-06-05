@@ -1,4 +1,4 @@
-
+import os
 from flask import jsonify, request
 from app.models.app_error import AppError
 from app.models.image_uploader import ImageUploader
@@ -11,8 +11,10 @@ from app.utils import generate_noisy_image, serializable_array_to_json_array
 class TaskController:
     @staticmethod
     def paginate():
+
         page = int(request.args.get('page', 1))
-        per_page = int(request.args.get('per_page', 10))
+        per_page = int(request.args.get(
+            'per_page', os.getenv("PER_PAGE_ITEM")))
         tasks = TaskService.paginate(page, per_page)
         return serializable_array_to_json_array(tasks, rules=('-drone_assignments.task', '-drone_assignments.drone_id', '-drone_assignments.task_id'))
 
